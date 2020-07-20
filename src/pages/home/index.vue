@@ -9,10 +9,19 @@
         interval="2000"
         duration="500"
       >
-        <swiper-item v-for="item in banner" :key="item.id" :src="item.imgUrl">
-          <image mode="scaleToFill" :src="item.imgUrl"></image>
+        <swiper-item v-for="item in banner" :key="item._id">
+          <navigator :url="`/pages/lesson/index?Id=${item.aid}`">
+            <image mode="scaleToFill" :src="item.cover"></image>
+          </navigator>
         </swiper-item>
       </swiper>
+    </view>
+    <!-- icons -->
+    <view class="icons">
+      <view class="item">
+        <image mode="scaleToFill" :src="item.imgUrl"></image>
+        <text class="title"></text>
+      </view>
     </view>
   </view>
 </template>
@@ -21,36 +30,29 @@
 export default {
   data() {
     return {
-      banner: [
-        {
-          id: 1,
-          imgUrl:
-            "http://p1.music.126.net/3Oz3JpYirDfQOmzgERgGJw==/109951165152149436.jpg"
-        },
-        {
-          id: 2,
-          imgUrl:
-            "http://p1.music.126.net/GGvIzHA3nhVD0DI0oXXYzg==/109951165152401266.jpg"
-        },
-        {
-          id: 3,
-          imgUrl:
-            "http://p1.music.126.net/KqqbRg-D-FYdpQX-NZ3bTQ==/109951165152205791.jpg"
-        },
-        {
-          id: 4,
-          imgUrl:
-            "http://p1.music.126.net/a5lQUWV7cfIyN0hXZQF_3w==/109951165152417733.jpg"
-        }
-      ]
+      banner: []
     };
   },
   onLoad() {},
-  methods: {}
+  mounted() {
+    this.init();
+  },
+  methods: {
+    init() {
+      uni.request({
+        url: "https://opser.api.dgtle.com/v1/carousel/2",
+        data: {},
+        header: {},
+        success: res => {
+          this.banner = res.data;
+        }
+      });
+    }
+  }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .page {
   @extend .content;
   // @extend .bgc;

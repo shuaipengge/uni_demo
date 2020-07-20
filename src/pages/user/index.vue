@@ -16,7 +16,7 @@ export default {
   },
   onLoad() {},
   mounted() {
-    init();
+    this.init();
   },
   methods: {
     init() {
