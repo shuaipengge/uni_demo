@@ -23,13 +23,15 @@
       </view>
 
       <!-- 文章内容 -->
-      <view class="content" v-if="lesson.content">
+      <!-- <view class="content" v-if="lesson.content">
         <u-parse :content="lesson.content"></u-parse>
-      </view>
+      </view> -->
 
       <!-- 点赞 -->
       <view class="likelist">
-        <view class="like">♥</view>
+        <view class="like">
+          <view class="iconfont icon-icon_love"></view>
+        </view>
         <text v-if="lesson.liketimes">{{ lesson.liketimes }} 人已赞</text>
         <view class="head-img" v-if="lesson.likelist">
           <!-- aspectFill 完整显示图片 保持纵横比 -->
@@ -97,6 +99,7 @@ export default {
 
 <style lang="scss" scoped>
 @import url("@/components/u-parse/u-parse.css");
+@import url("../../static/iconfont/iconfont.css");
 
 .page {
   @extend .content;
@@ -152,11 +155,12 @@ export default {
         height: 45px;
         background-color: #cfd8e2;
         border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 30px;
-        color: #fff;
+        .iconfont{
+          font-size: 25px;
+          text-align: center;
+          line-height: 45px;
+          color: #fff;
+        }
       }
       text {
         display: block;
