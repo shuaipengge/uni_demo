@@ -23,9 +23,9 @@
       </view>
 
       <!-- 文章内容 -->
-      <!-- <view class="content" v-if="lesson.content">
+      <view class="content" v-if="lesson.content">
         <u-parse :content="lesson.content"></u-parse>
-      </view> -->
+      </view>
 
       <!-- 点赞 -->
       <view class="likelist">
@@ -48,14 +48,22 @@
       <!-- 猜你喜欢 -->
       <view class="you-like">
         <text>可能你还会喜欢</text>
-        <view class="perhaps_like">
-          <image></image>
-          <view class="righ">
-            <view class="title"></view>
-            <view class="username"></view>
-          </view>
-        </view>
       </view>
+      <navigator
+        class="perhaps_like"
+        v-for="item in lesson.perhaps_like"
+        :key="item.id"
+        :url="`/pages/lesson/index?Id=${item.id}`"
+      >
+        <view class="left">
+          <image mode="aspectFill" :src="item.cover"></image>
+        </view>
+
+        <view class="righ">
+          <view class="like-title">{{ item.title }}</view>
+          <view class="like-username">{{ item.author.username }}</view>
+        </view>
+      </navigator>
 
       <!-- 评论区 -->
     </view>
@@ -155,7 +163,7 @@ export default {
         height: 45px;
         background-color: #cfd8e2;
         border-radius: 50%;
-        .iconfont{
+        .iconfont {
           font-size: 25px;
           text-align: center;
           line-height: 45px;
@@ -199,6 +207,40 @@ export default {
         margin: 15px 0;
         color: #0f2540;
         font-size: 14px;
+      }
+    }
+    .perhaps_like {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 10px 0;
+      .left {
+        image {
+          width: 94px;
+          height: 94px;
+          border-radius: 5px;
+        }
+        margin-right: 20px;
+      }
+
+      .right {
+        margin-left: 20px;
+        width: 400rpx;
+        height: 80rpx;
+        .like-title {
+          display: inline-block;
+          font-size: 16px;
+          margin-bottom: 10px;
+          color: #0f2540;
+          line-height: 20px;
+        }
+        .like-username {
+          display: inline-block;
+          margin-top: 10px;
+          color: #c6c6c6;
+          font-size: 12px;
+          line-height: 12px;
+        }
       }
     }
   }
